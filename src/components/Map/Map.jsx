@@ -8,7 +8,7 @@ import useStyles from './styles.js';
 
 const API_KEY = '';
 
-const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }) => {
+const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, weatherData }) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery('(min-width:600px)');
 
@@ -50,6 +50,11 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
                 </Paper>
               )
             }
+          </div>
+        ))}
+        {weatherData?.list?.map((data, i) => (
+          <div key={i} lat={data.location.lat} lng={data.location.lon}>
+            <img alt="weatherIcon" height={100} src={`https:${data.current.condition.icon}`}></img>
           </div>
         ))}
       </GoogleMapReact>
